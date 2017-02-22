@@ -1,0 +1,7 @@
+name: Views Conditional
+type: module
+description: 'Allows conditional views output.'
+dependencies:
+  - views
+package: Views
+core: 8.x
