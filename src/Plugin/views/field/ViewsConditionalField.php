@@ -6,6 +6,7 @@
  */
 
 namespace Drupal\views_conditional\Plugin\views\field;
+
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
