@@ -10,18 +10,18 @@
  */
 function views_conditional_views_data() {
   $data['views_conditional']['table']['group'] = t('Views');
-  $data['views_conditional']['table']['join'] = array(
-    '#global' => array(),
-  );
+  $data['views_conditional']['table']['join'] = [
+    '#global' => [],
+  ];
 
-  $data['views_conditional']['views_conditional_field'] = array(
+  $data['views_conditional']['views_conditional_field'] = [
     'title' => t('Views Conditional'),
-    'field' => array(
+    'field' => [
       'title' => t('Views Conditional'),
       'help' => t('Output data based off of certain criteria.'),
       'id' => 'views_conditional_field',
-    ),
-  );
+    ],
+  ];
 
   return $data;
 }

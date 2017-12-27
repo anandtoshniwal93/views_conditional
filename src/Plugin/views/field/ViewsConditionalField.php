@@ -28,7 +28,7 @@ class ViewsConditionalField extends FieldPluginBase {
     $this->field_alias = 'views_conditional_' . $this->position;
   }
   // Conditional operators.
-  public $conditions = array(
+  public $conditions = [
     1 => 'Equal to',
     2 => 'NOT equal to',
     3 => 'Greater than',
@@ -41,7 +41,7 @@ class ViewsConditionalField extends FieldPluginBase {
     10 => 'Length NOT equal to',
     11 => 'Length Greater than',
     12 => 'Length Less than',
-  );
+  ];
 
   /**
    * Define the available options
@@ -51,7 +51,7 @@ class ViewsConditionalField extends FieldPluginBase {
     $options = parent::defineOptions();
     $options['label']['default'] = NULL;
 
-    $options['if'] = array('default' => '');
+    $options['if'] = ['default' => ''];
     $options['condition'] = ['default' => ''];
     $options['equalto'] = ['default' => ''];
     $options['then'] = ['default' => ''];
@@ -79,56 +79,56 @@ class ViewsConditionalField extends FieldPluginBase {
     }
     $fields += $field;
 
-    $form['if'] = array(
+    $form['if'] = [
       '#type' => 'select',
       '#title' => $this->t('If this field...'),
       '#options' => $fields,
       '#default_value' => $this->options['if'],
-    );
-    $form['condition'] = array(
+    ];
+    $form['condition'] = [
       '#type' => 'select',
       '#title' => $this->t('Is...'),
       '#options' => $this->conditions,
       '#default_value' => $this->options['condition'],
-    );
-    $form['equalto'] = array(
+    ];
+    $form['equalto'] = [
       '#type' => 'textfield',
       '#title' => $this->t('This value'),
       '#description' => $this->t('Input a value to compare the field against.  Replacement variables may be used'),
       '#default_value' => $this->options['equalto'],
-    );
-    $form['then'] = array(
+    ];
+    $form['then'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Then output this...'),
       '#description' => $this->t('Input what should be output.  Replacement variables may be used.'),
       '#default_value' => $this->options['then'],
-    );
-    $form['or'] = array(
+    ];
+    $form['or'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Otherwise, output this...'),
       '#description' => $this->t('Input what should be output if the above conditions do NOT evaluate to true.'),
       '#default_value' => $this->options['or'],
-    );
-    $form['strip_tags'] = array(
+    ];
+    $form['strip_tags'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Strip html tags from the output'),
       '#default_value' => $this->options['strip_tags'],
-    );
-    $form['replacements'] = array(
+    ];
+    $form['replacements'] = [
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#title' => $this->t('Replacement Variables'),
-    );
-    $form['replacements']['notice'] = array(
+    ];
+    $form['replacements']['notice'] = [
       '#markup' => 'You may use any of these replacement variables in the "equals" or the "output" text fields.  If you wish to use brackets ([ or ]), replace them with %5D or %5E.',
       '#prefix' => '<p>',
       '#suffix' => '</p>',
-    );
-    $items = array(
+    ];
+    $items = [
       'DATE_UNIX => Current date / time, in UNIX timestamp format (' . REQUEST_TIME . ')',
       'DATE_STAMP => Current date / time, in standard format (' . format_date(REQUEST_TIME) . ')',
-    );
+    ];
     $views_fields = $this->view->display_handler->getHandlers('field');
     foreach ($views_fields as $field => $handler) {
       // We only use fields up to (not including) this one.
@@ -137,10 +137,10 @@ class ViewsConditionalField extends FieldPluginBase {
       }
       $items[] = "[$field]";
     }
-    $form['replacements']['variables'] = array(
+    $form['replacements']['variables'] = [
       '#theme' => 'item_list',
       '#items' => $items,
-    );
+    ];
     parent::buildOptionsForm($form, $form_state);
   }
 
@@ -157,10 +157,10 @@ class ViewsConditionalField extends FieldPluginBase {
         $form_state->setErrorByName('condition', t("Please select a conditional operator."));
       }
       // We using there is_numeric because values '0', '0.0' counting as empty in PHP language.
-      if (empty($values['options']['equalto']) && !in_array($values['options']['condition'], array(
+      if (empty($values['options']['equalto']) && !in_array($values['options']['condition'], [
           5,
           6
-        )) && !is_numeric($values['options']['equalto'])
+        ]) && !is_numeric($values['options']['equalto'])
       ) {
         $form_state->setErrorByName('condition', t("Please specify something to compare with."));
       }
