@@ -149,18 +149,18 @@ class ViewsConditionalField extends FieldPluginBase {
    */
   public function validateOptionsForm(&$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    if (empty($values[options]['if']) || empty($values[options]['condition']) || empty($values[options]['equalto'])) {
-      if (empty($values[options]['if'])) {
+    if (empty($values['options']['if']) || empty($values['options']['condition']) || empty($values['options']['equalto'])) {
+      if (empty($values['options']['if'])) {
         $form_state->setErrorByName('if', $this->t("Please specify a valid field to run a condition on."));
       }
-      if (empty($values[options]['condition'])) {
+      if (empty($values['options']['condition'])) {
         $form_state->setErrorByName('condition', t("Please select a conditional operator."));
       }
       // We using there is_numeric because values '0', '0.0' counting as empty in PHP language.
-      if (empty($values[options]['equalto']) && !in_array($values[options]['condition'], array(
+      if (empty($values['options']['equalto']) && !in_array($values['options']['condition'], array(
           5,
           6
-        )) && !is_numeric($values[options]['equalto'])
+        )) && !is_numeric($values['options']['equalto'])
       ) {
         $form_state->setErrorByName('condition', t("Please specify something to compare with."));
       }
